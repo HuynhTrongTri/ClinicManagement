@@ -31,6 +31,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { MainHeaderComponent } from './common/main-header/main-header.component';
 import { MainFooterComponent } from './common/main-footer/main-footer.component';
 import { SlidemenuComponent } from './common/slidemenu/slidemenu.component';
+import { LoginModule } from './pages/login/login.module';
 
 
 
@@ -43,6 +44,7 @@ import { SlidemenuComponent } from './common/slidemenu/slidemenu.component';
     
   ],
   imports: [
+    LoginModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
