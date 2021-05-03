@@ -17,7 +17,7 @@ export class MainHeaderComponent implements OnInit {
       items: [{
         label: 'View Profile',
         icon: 'pi pi-user-edit',
-        routerLink: '',
+        routerLink: '/profile',
       },
       {
         label: 'Log out',
