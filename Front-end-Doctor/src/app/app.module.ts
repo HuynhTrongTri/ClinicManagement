@@ -31,10 +31,10 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { MainHeaderComponent } from './common/main-header/main-header.component';
 import { MainFooterComponent } from './common/main-footer/main-footer.component';
 import { SlidemenuComponent } from './common/slidemenu/slidemenu.component';
-import { LoginComponent } from './common/login/login.component';
-import { HomeComponent } from './common/home/home.component';
-import { AppointmentDetailsComponent } from './common/appointment-details/appointment-details.component';
-import { ProfileComponent } from './common/profile/profile.component';
+import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 
