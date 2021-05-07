@@ -1,15 +1,18 @@
-<div class="w-auto text-center">
-  <div class="w-1/6 bg-indigo-300 mx-auto mt-10 rounded-lg">
-    <div class="text-4xl bg-purple-300 w-auto h-2/3 rounded-lg">
-      <h1>Doctor</h1>
+<div class="w-3/5 float-left h-screen content-center flex flex-wrap">
+    <img src="assets/pics/doctor.png" class="overflow-hidden box-border w-full">
+</div>
+
+<div class="w-2/5 float-left h-screen text-center content-center flex flex-wrap bg-green-100">
+  <div class="w-2/3 bg-indigo-100 mx-auto h-1/2 rounded-lg">
+    <div class="w-full bg-purple-200 h-1/5 rounded-lg pt-6">
+      <h1 class="font-bold text-4xl">Doctor</h1>
     </div>
-    <div class="px-4">
+    <div class="px-12">
       <div class="form-holder">
         <input type="email" class="input" placeholder="Email" />
         <input type="password" class="input" placeholder="Password" />
       </div>
     </div>
-    <button class="submit-btn" routerLink="/home" routerLinkActive="active">Log in</button>
-    &nbsp;
+    <button class="submit-btn" (click)="navigateTo('/home')">Log in</button><br />
   </div>
 </div>

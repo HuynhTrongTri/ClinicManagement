@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-appointment-details',
@@ -8,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class AppointmentDetailsComponent implements OnInit {
 
   appoitmentID = 2931;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  navigateTo(path: string){
+    this.router.navigateByUrl(path);
   }
 
 }
