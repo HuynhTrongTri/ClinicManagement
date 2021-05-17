@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-main-header',
@@ -10,7 +11,7 @@ import { MenuItem } from 'primeng/api';
 export class MainHeaderComponent implements OnInit {
 
   items!: MenuItem[];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authSer:AuthService) { }
   userName: string = "QuanBT";
   ngOnInit(): void {
     this.items = [{
@@ -23,6 +24,7 @@ export class MainHeaderComponent implements OnInit {
         label: 'Log out',
         icon: 'pi pi-sign-out',
         routerLink: '/',
+        command: e => this.authSer.logout()
       }
       ]
     },

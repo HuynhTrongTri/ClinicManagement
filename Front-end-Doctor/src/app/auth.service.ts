@@ -13,7 +13,7 @@ export class AuthService {
     return this.loginApi.apiLogin(data).pipe(
       shareReplay(),
       tap((res) => {
-        this.setSession(res);
+        this.setSession('Bearer ' + res);
       })
     );
   }
@@ -27,7 +27,7 @@ export class AuthService {
     return localStorage.getItem('Authorization');
   }
   setAccessToken(accessToken: string) {
-    localStorage.setItem('Authorization', accessToken);
+    localStorage.setItem('Authorization', "Bearer " + accessToken);
   }
   private setSession(accessToken: string) {
     localStorage.setItem('Authorization', accessToken);

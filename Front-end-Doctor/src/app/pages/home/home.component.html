@@ -4,92 +4,83 @@
     <div class="w-3/5 mx-auto">
       <p-tabView>
         <p-tabPanel header="Coming">
-          <p-table [value]="" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          <p-table [value]="comingAppointment" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [rowsPerPageOptions]="[10,25,50]">
             <ng-template pTemplate="header">
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Time</th>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-appointment>
               <tr>
-                <td>{{appointment.name}}</td>
-                <td>{{appointment.country.name}}</td>
-                <td>{{appointment.company}}</td>
-                <td>{{appointment.representative.name}}</td>
-                <td>{{appointment.time}}</td>
+                <td>{{appointment.patientName}}</td>
+                <td>{{appointment.date | date}}</td>
+                <td *ngIf="appointment.hour">{{appointment.hour}}:00</td>
+                <td>{{appointment.statusName}}</td>
+                <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                    style="margin-right: 5px;" (click)="openAppointmentDetails(appointment.id)"></button>
+                </td>
               </tr>
-            </ng-template>
-            <ng-template pTemplate="paginatorleft">
-              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-            </ng-template>
-            <ng-template pTemplate="paginatorright">
-              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" (click)="navigateTo('/details')"></p-button>
             </ng-template>
           </p-table>
         </p-tabPanel>
         <p-tabPanel header="Cancel">
-          <p-table [value]="" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          <p-table [value]="cancelAppointment" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [rowsPerPageOptions]="[10,25,50]">
             <ng-template pTemplate="header">
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Time</th>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-appointment>
               <tr>
-                <td>{{appointment.name}}</td>
-                <td>{{appointment.country.name}}</td>
-                <td>{{appointment.company}}</td>
-                <td>{{appointment.representative.name}}</td>
-                <td>{{appointment.time}}</td>
+                <td>{{appointment.patientName}}</td>
+                <td>{{appointment.date | date}}</td>
+                <td *ngIf="appointment.hour">{{appointment.hour}}:00</td>
+                <td>{{appointment.statusName}}</td>
+                <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                    style="margin-right: 5px;" (click)="openAppointmentDetails(appointment.id)"></button>
+                </td>
               </tr>
-            </ng-template>
-            <ng-template pTemplate="paginatorleft">
-              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-            </ng-template>
-            <ng-template pTemplate="paginatorright">
-              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
             </ng-template>
           </p-table>
         </p-tabPanel>
         <p-tabPanel header="History">
-          <p-table [value]="" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+          <p-table [value]="listAppointment" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [rowsPerPageOptions]="[10,25,50]">
             <ng-template pTemplate="header">
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Time</th>
+                <th>Patient</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-appointment>
               <tr>
-                <td>{{appointment.name}}</td>
-                <td>{{appointment.country.name}}</td>
-                <td>{{appointment.company}}</td>
-                <td>{{appointment.representative.name}}</td>
-                <td>{{appointment.time}}</td>
+                <td>{{appointment.patientName}}</td>
+                <td>{{appointment.date | date}}</td>
+                <td *ngIf="appointment.hour">{{appointment.hour}}:00</td>
+                <td>{{appointment.statusName}}</td>
+                <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                    style="margin-right: 5px;" (click)="openAppointmentDetails(appointment.id)"></button>
+                </td>
               </tr>
-            </ng-template>
-            <ng-template pTemplate="paginatorleft">
-              <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
-            </ng-template>
-            <ng-template pTemplate="paginatorright">
-              <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
             </ng-template>
           </p-table>
         </p-tabPanel>

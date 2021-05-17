@@ -1,4 +1,10 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { request } from 'node:http';
+import { AppService } from 'src/app/app.service';
+import { ProfileService } from './profile.service';
+import { User } from './User';
 
 @Component({
   selector: 'app-profile',
@@ -7,15 +13,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  fullname = "Bui Trung Quan";
-  address = "Ho Chi Minh City";
-  yob = "1999";
-  experience = "6 years";
-  email = "trungquan10a10@gmail.com";
-  phone = "0942740717";
-  constructor() { }
+  id: number;
+  currentUser: User;
+
+  constructor(private appService: AppService, private proService: ProfileService, private router: Router) { }
+
 
   ngOnInit() {
+    this.appService.currentDoctorId.subscribe(x => {
+      this.id = x;
+    });
+    this.getDoctorInfo(this.id);
   }
 
+  async getDoctorInfo(id: any) {
+    try {
+      const reqApi = await this.proService.apiProfile(id).toPromise();
+      console.log(reqApi);
+      this.currentUser = reqApi;
+    } catch (error) {
+      this.router.navigateByUrl('/');
+    }
+  }
+
+  async updateDoctorInfo(id: any) {
+    try {
+      const reqApi = await this.proService.apiUpdateProfile(id, id).toPromise();
+      console.log(reqApi);
+      this.currentUser = reqApi;
+    } catch (error) {
+      this.router.navigateByUrl('/');
+    }
+  }
 }

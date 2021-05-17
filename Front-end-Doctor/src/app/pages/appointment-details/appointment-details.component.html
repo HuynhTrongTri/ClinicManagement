@@ -1,24 +1,44 @@
 <app-main-header></app-main-header>
-<div class="min-h-screen flex flex-wrap w-full content-center" >
-  <div class="w-full">
-    <div class="w-2/3 mx-auto bg-blue-200 rounded-md">
-      <span class="font-bold px-4">Appointment ID: <span class="text-red-700">{{appoitmentID}}</span></span>
-      <table class="w-1/2 mx-auto">
-        <tr>
-          <td>Time</td>
-          <td>5:10</td>
+<div class="min-h-screen">
+  <div class="pt-10 px-6">
+    <div>
+      <h1 class="text-center text-3xl font-bold mb-10">Appointment Detail</h1>
+    </div>
+    <div class="flex">
+      <div class="grid w-1/2">
+        <label for="doctor">Doctor</label>
+        <input id="doctor" value="{{currentAppointment?.doctorName}}" type="text" pInputText disabled>
+      </div>
+      <div class="grid w-1/2 pl-10">
+        <label for="patient">Patient</label>
+        <input id="patient" value="{{currentAppointment?.patientName}}" type="text" pInputText disabled>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="grid w-1/3 pr-10">
+        <label for="date">Date</label>
+        <input id="date" type="text" value="{{currentAppointment?.date | date}}" pInputText disabled>
+      </div>
+      <div class="grid w-1/3 pr-10">
+        <label for="hour">Hour</label>
+        <input id="hour" type="text" value="{{currentAppointment?.hour}}:00" pInputText disabled>
+      </div>
+      <div class="grid w-1/3">
+        <label for="status">Status</label>
+        <input id="status" value="{{currentAppointment?.statusName}}" type="text" pInputText disabled="true">
+      </div>
+    </div>
 
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td>HCM</td>
-        </tr>
-        <tr>
-          <td>Name</td>
-          <td>Nam</td>
-        </tr>
-      </table>
-      &nbsp;
+    <div class="grid">
+      <label for="feedback">Feedback</label>
+      <textarea id="feedback" type="text" rows="4" value="{{currentAppointment?.feedback}}" pInputTextarea></textarea>
+    </div>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+    <div class="mt-4 float-right">
+      <p-button type="button" label="Save" styleClass="p-button-success"></p-button>
+      <p-button class="ml-4" type="button" label="Cancel" styleClass="p-button-secondary" routerLink="/home">
+      </p-button>
     </div>
   </div>
 </div>

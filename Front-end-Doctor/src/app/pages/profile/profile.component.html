@@ -9,31 +9,23 @@
         <table class="w-4/5 mx-auto mt-6">
           <tr>
             <td class="title">Name:</td>
-            <td><input value="{{fullname}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Address:</td>
-            <td><input value="{{address}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Year of birth:</td>
-            <td><input value="{{yob}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Experience:</td>
-            <td><input value="{{experience}}"></td>
+            <td><input value="{{currentUser?.name}}"></td>
           </tr>
           <tr>
             <td class="title">Email:</td>
-            <td><input value="{{email}}"></td>
+            <td><input value="{{currentUser?.email}}"></td>
           </tr>
           <tr>
-            <td class="title">Phone number:</td>
-            <td><input value="{{phone}}"></td>
+            <td class="title">Address:</td>
+            <td><input value="{{currentUser?.address}}"></td>
+          </tr>
+          <tr>
+            <td class="title">Date of birth:</td>
+            <td><input value="{{currentUser?.dateOfBirth}}"></td>
           </tr>
         </table>
         <button class="submit-btn">Update</button>
-        &nbsp;
+        <br/>
       </div>
     </div>
   </div>
