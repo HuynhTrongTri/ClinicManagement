@@ -13,7 +13,7 @@ export class AuthService {
         return this.loginApi.apiLogin(data).pipe(
             shareReplay(),
             tap((res) => {
-                this.setSession(res);
+                this.setSession("Bearer "+ res);
             })
         );
     }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { LoginService } from './login.service';
+import jwt_decode from "jwt-decode";
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +16,8 @@ export class LoginComponent implements OnInit {
   data: any;
   errorMessage: string = '';
   isError: boolean;
-
-  constructor(private router: Router, private authService: AuthService, private loginService: LoginService) { }
+  constructor(private router: Router, private authService: AuthService, private loginService: LoginService,
+    private appService: AppService) { }
 
   ngOnInit(): void {
   }
@@ -27,13 +29,11 @@ export class LoginComponent implements OnInit {
     };
     console.log(data);
     const reqApi = await this.authService.login(data).toPromise();
-    console.log(reqApi);
-    if (reqApi.statusCode === 200) {
-      if (reqApi.data.role === 9999) {
-        this.router.navigateByUrl('/home-admin');
-      } else {
-        this.router.navigateByUrl('/home');
-      }
+    const decode =  await jwt_decode(reqApi);
+    console.log(decode);
+    if (decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Patient") {
+     this.appService.changeId(parseInt(decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]));     
+     this.router.navigateByUrl("/list-appointment");
     } else {
       this.isError = true;
       this.errorMessage = 'Invalid UserName or Password';

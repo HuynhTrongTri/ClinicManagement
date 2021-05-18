@@ -9,7 +9,7 @@ export class WebRequestService {
   readonly ROOT_URL;
 
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'https://easycare-api-app.azurewebsites.net';
+    this.ROOT_URL = 'https://doctorcareapi.azurewebsites.net';
   }
 
   get(uri: string) {

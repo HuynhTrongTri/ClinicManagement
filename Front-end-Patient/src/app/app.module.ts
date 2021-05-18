@@ -28,10 +28,16 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { SidebarModule } from 'primeng/sidebar';
 import { MainHeaderComponent } from './common/main-header/main-header.component';
 import { MainFooterComponent } from './common/main-footer/main-footer.component';
 import { SlidemenuComponent } from './common/slidemenu/slidemenu.component';
 import { LoginModule } from './pages/login/login.module';
+import { ListDoctorComponent } from './pages/list-doctor/list-doctor.component';
+import { WebReqInterceptor } from './web-req.interceptor';
+import { ListAppointmentComponent } from './pages/list-appointment/list-appointment.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AppointmentDetailComponent } from './pages/appointment-detail/appointment-detail.component';
 
 
 
@@ -40,7 +46,11 @@ import { LoginModule } from './pages/login/login.module';
     AppComponent,
     MainHeaderComponent,
     MainFooterComponent,
-    SlidemenuComponent
+    SlidemenuComponent,
+    ListDoctorComponent,
+    ListAppointmentComponent,
+    ProfileComponent,
+    AppointmentDetailComponent
     
   ],
   imports: [
@@ -67,16 +77,17 @@ import { LoginModule } from './pages/login/login.module';
     DropdownModule,
     TooltipModule,
     TabViewModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SidebarModule
   ],
   providers: [MessageService, ConfirmationService,
-    // [
-    //   {
-    //     provide: HTTP_INTERCEPTORS,
-    //     useClass: WebReqInterceptor,
-    //     multi: true,
-    //   },
-    // ]
+    [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: WebReqInterceptor,
+        multi: true,
+      },
+    ]
   ],
 
   bootstrap: [AppComponent]

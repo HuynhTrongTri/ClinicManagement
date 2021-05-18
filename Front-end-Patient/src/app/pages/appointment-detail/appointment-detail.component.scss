@@ -1,0 +1,8 @@
+:host ::ng-deep {
+    .p-disabled, .p-component:disabled {
+        background-color: lightyellow;
+    }
+}
+label {
+    font-size: larger;
+}

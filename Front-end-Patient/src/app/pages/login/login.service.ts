@@ -10,7 +10,7 @@ export class LoginService {
   // currentRole = this.roleSource.asObservable();
   readonly ROOT_URL;
   constructor(private httpClient: HttpClient) {
-    this.ROOT_URL = 'https://easycare-api-app.azurewebsites.net/api/Users/login';
+    this.ROOT_URL = 'https://doctorcareapi.azurewebsites.net/api/Users/login';
   }
   apiLogin(data: any): Observable<any> {
     return this.httpClient.post(this.ROOT_URL, data, {responseType: 'text'});

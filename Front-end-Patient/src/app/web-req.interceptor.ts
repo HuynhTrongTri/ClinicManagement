@@ -24,8 +24,6 @@ export class WebReqInterceptor implements HttpInterceptor {
             })
         );
     }
-
-
     addAuthHeader(request: HttpRequest<any>) {
         const token = this.authService.getAccessToken();
         if (token) {

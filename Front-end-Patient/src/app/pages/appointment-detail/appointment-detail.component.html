@@ -1,0 +1,47 @@
+<div class="pt-10 px-6">
+    <div>
+        <button pButton pRipple icon="pi pi-arrow-left" style="margin-right: 5px;" 
+        (click)="backToList()"></button>
+        <h1 class="text-center text-3xl font-bold mb-10">Appointment Detail</h1>
+    </div>
+    <div class="flex">
+        <div class="grid w-1/2">
+            <label for="doctor">Doctor</label>
+            <input id="doctor" value="{{appointment?.doctorName}}" type="text" pInputText disabled>
+        </div>
+        <div class="grid w-1/2 pl-10">
+            <label for="patient">Patient</label>
+            <input id="patient" value="{{appointment?.patientName}}" type="text" pInputText disabled>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="grid w-1/3 pr-10">
+            <label for="date">Date</label>
+            <input id="date" type="text" value="{{appointment?.date | date}}" pInputText disabled>
+        </div>
+        <div class="grid w-1/3 pr-10">
+            <label for="hour">Hour</label>
+            <input id="hour" type="text" value="{{appointment?.hour}}:00" pInputText disabled>
+        </div>
+        <div class="flex items-center w-1/3">
+            <div class="grid w-3/5">
+                <label for="status">Status</label>
+                <input id="status" value="{{appointment?.statusName}}" type="text" pInputText disabled>
+            </div>
+            <p-button class="mt-6 w-2/5 ml-12" type="button" label="Cancel Appointment"
+                (click)="cancelAppointment(appointment.id)" styleClass="p-button-secondary"></p-button>
+        </div>
+    </div>
+
+    <div class="grid">
+        <label for="feedback">Feedback</label>
+        <textarea id="feedback" type="text" rows="4" value="{{appointment?.feedback}}" pInputTextarea
+            disabled></textarea>
+    </div>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+    <div class="mt-4 float-right">
+        <p-button class="ml-4" type="button" label="Cancel" (click)="backToList()" styleClass="p-button-secondary">
+        </p-button>
+    </div>
+</div>

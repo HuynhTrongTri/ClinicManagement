@@ -1,0 +1,93 @@
+<!-- <app-list-doctor></app-list-doctor> -->
+<div class="flex">
+    <div style="width: 1200px; min-height: 522px;" class="mx-auto my-4 rounded-3xl">
+        <p-toast></p-toast>
+        <p-table #dt [value]="listAppointment" [rows]="10" [paginator]="true" [globalFilterFields]="['statusName']"
+            [(selection)]="selectedAppointment" [rowHover]="true" dataKey="id"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="flex place-content-between items-center">
+                    <h1 class="text-3xl m-0">Manage Appointment</h1>
+                    <span class="p-input-icon-left ">
+                        <i class="pi pi-search"></i>
+                        <input style="width: 500px; border-radius: 10px;" pInputText type="text"
+                            (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search..." />
+                    </span>
+                    <div>
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success"
+                            style="margin-right: 10px;" (click)="openNew()" pTooltip="Create New Task"
+                            tooltipPosition="top"></button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="w-2/12">No</th>
+                    <th class="w-2/12" pSortableColumn="doctorName">Doctor<p-sortIcon field="doctorName">
+                        </p-sortIcon>
+                    </th>
+                    <th class="w-2/12" pSortableColumn="date">Date<p-sortIcon field="date">
+                        </p-sortIcon>
+                    </th>
+                    <th class="w-2/12" pSortableColumn="hour">Hour<p-sortIcon field="hour">
+                        </p-sortIcon>
+                    </th>
+                    <th class="w-2/12" pSortableColumn="statusName">Status<p-sortIcon field="statusName">
+                        </p-sortIcon>
+                    </th>
+                    <th class="w-2/12">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-appointment>
+                <tr>
+                    <td>{{listAppointment.indexOf(appointment) + 1}}</td>
+                    <td class="overflow-ellipsis overflow-hidden whitespace-nowrap">{{appointment.doctorName}}</td>
+                    <td>{{appointment.date | date}}</td>
+                    <td *ngIf="appointment.hour">{{appointment.hour}}:00</td>
+                    <td>{{appointment.statusName}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success"
+                            style="margin-right: 5px;" (click)="editAppointment(appointment)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="summary">
+                <div class="flex">
+                    <!-- In total there are {{appointments ? appointments.length : 0 }} appointments. -->
+                </div>
+            </ng-template>
+        </p-table>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>
+<p-dialog [(visible)]="appointmentDialog" [style]="{width: '450px'}" header="Create New Appointment" [modal]="true"
+    styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="doctorName">Doctor</label>
+            <p-dropdown [(ngModel)]="appointment.doctor" inputId="doctorName" [options]="listDoctor" optionLabel="name"
+                placeholder="Select" [showClear]="true">
+            </p-dropdown>
+            <small class="p-error" *ngIf="submitted && !appointment.doctorName">Doctor is required.</small>
+        </div>
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="date">Date</label>
+                <input type="date" id="date" [(ngModel)]="appointment.date" pInputText />
+                <small class="p-error" *ngIf="submitted && !appointment.date">Date is required.</small>
+            </div>
+            <div class="p-field p-col">
+                <label for="hour">Hour</label>
+                <input type="number" max="24" min="0" id="hour" [(ngModel)]="appointment.hour" pInputText />
+                <small class="p-error" *ngIf="submitted && !appointment.hour">Hour is required.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            (click)="createAppointment()"></button>
+    </ng-template>
+</p-dialog>
