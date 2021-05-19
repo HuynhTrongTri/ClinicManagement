@@ -11,4 +11,7 @@ export class ProfileService {
   getUserById(id) : Observable<any> {
     return this.req.get("api/Users/"+id);
   }
+  updateUser(id,data) : Observable<any> {
+    return this.req.put("api/Users/"+id,data);
+  }
 }

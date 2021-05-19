@@ -21,7 +21,6 @@ export class ListDoctorComponent implements OnInit {
   }
   async getListDoctor() {
     const listDoctor = await this.service.getListDoctor().toPromise();
-    // console.log(listDoctor);
   }
   editDoctor(appt: Doctor) {
     this.Doctor = { ...appt };

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-main-header',
@@ -10,25 +11,25 @@ import { MenuItem } from 'primeng/api';
 export class MainHeaderComponent implements OnInit {
 
   items!: MenuItem[];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
   userName: string = "Huynh Trong Tri";
   ngOnInit(): void {
     this.items = [{
       items: [{
         label: 'View Profile',
         icon: 'pi pi-user-edit',
-        routerLink: '',
+        routerLink: '/profile',
       },
       {
         label: 'Log out',
         icon: 'pi pi-sign-out',
-        routerLink: '/',
+        command: e => this.goToHome()
       }
       ]
     },
     ];
   }
   goToHome() {
-    this.router.navigateByUrl("/home");
+    this.authService.logout();
   }
 }

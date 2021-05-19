@@ -4,9 +4,9 @@ export interface Patient {
     id?: number,
     email?: string,
     name?: string,
-    address: string,
-    dateOfBirth: Date,
-    roleId: number,
-    roleName: string,
-    doctorAppointments: Appointment[];
+    address?: string,
+    dateOfBirth?: Date,
+    roleId?: number,
+    roleName?: string,
+    doctorAppointments?: Appointment[];
 }

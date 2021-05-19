@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<div class="mx-4 my-4">
+    <button pButton pRipple icon="pi pi-home" style="margin-right: 5px;" (click)="backToHome()"></button>
+</div>
+<div class="bg-blue-200 mx-48 py-4">
+    <p-toast></p-toast>
+    <h1 class="text-center text-3xl font-bold mb-10">Your Profile</h1>
+
+    <div class="field">
+        <label for="doctor">Name</label>
+        <input id="doctor" value="{{patient?.name}}" type="text" pInputText [(ngModel)]="patient.name" [disabled]="isDisabled">
+    </div>
+    <div class="field">
+        <label for="patient">Email</label>
+        <input id="patient" value="{{patient?.email}}" type="text" pInputText [(ngModel)]="patient.email" [disabled]="isDisabled">
+    </div>
+    <div class="field">
+        <label for="date">Date Of Birth</label>
+        <input  id="date" type="date" value="{{patient?.dateOfBirth}}" pInputText [(ngModel)]="patient.dateOfBirth"
+        [disabled]="isDisabled">
+    </div>
+    <div class="field">
+        <label for="hour">Address</label>
+        <input  id="hour" type="text" value="{{patient?.address}}" [(ngModel)]="patient.address" pInputText [disabled]="isDisabled">
+    </div>
+    <div class="field">
+        <label for="status">Total Appointments</label>
+        <input id="status" value="{{patient?.doctorAppointments.length}}" type="text" pInputText disabled>
+    </div>
+    <div class="mt-8 float-right">
+        <p-button *ngIf="isEdit === false" label="Edit" (click)="edit()"></p-button>
+        <p-button *ngIf="isEdit" type="button" label="Save" (click)="updateProfile()" styleClass="p-button-success">
+        </p-button>
+        <p-button *ngIf="isEdit" class="ml-3" type="button" label="Cancel" (click)="cancelUpdate()" styleClass="p-button-secondary">
+        </p-button>
+    </div>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+</div>

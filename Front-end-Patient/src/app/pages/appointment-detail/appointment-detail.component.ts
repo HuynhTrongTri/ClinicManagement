@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AppService } from 'src/app/app.service';
 import { Appointment } from '../list-appointment/appointment-model';
 import { AppointmentService } from '../list-appointment/appointment.service';
@@ -13,14 +13,13 @@ import { AppointmentService } from '../list-appointment/appointment.service';
 export class AppointmentDetailComponent implements OnInit {
   appointment: Appointment;
   constructor(private appointmentService: AppointmentService, private appService: AppService, 
-    private confirmMessage: ConfirmationService, private route: Router) { }
+    private confirmMessage: ConfirmationService, private route: Router, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.appService.appointmentId.subscribe(x => this.getAppointment(x));
   }
   async getAppointment(id) {
     this.appointment = await this.appointmentService.getAppointmentById(id).toPromise();
-    console.log(this.appointment);
     if (this.appointment.feedback === undefined || this.appointment.feedback === null) {
       this.appointment.feedback = "Have not feedback yet!";
     }
@@ -40,10 +39,13 @@ export class AppointmentDetailComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: async () => {
-        console.log(data);
-        const res = await this.appointmentService.updateAppointment(id, data).toPromise();
-        this.getAppointment(id);
-        console.log(res);
+        if (this.appointment.statusName === "Cancel") {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Appointment be canceled!', life: 3000 });
+        } else {
+          const res = await this.appointmentService.updateAppointment(id, data).toPromise();
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Cancel Successful!', life: 3000 });
+          this.getAppointment(id);
+        }
       }
     });
 

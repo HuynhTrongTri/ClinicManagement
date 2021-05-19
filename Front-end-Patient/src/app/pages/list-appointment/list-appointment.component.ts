@@ -13,7 +13,7 @@ export interface DoctorOption{
 @Component({
   selector: 'app-list-appointment',
   templateUrl: './list-appointment.component.html',
-  styleUrls: ['./list-appointment.component.css']
+  styleUrls: ['./list-appointment.component.scss']
 })
 export class ListAppointmentComponent implements OnInit {
   appointment: Appointment;
@@ -38,7 +38,6 @@ export class ListAppointmentComponent implements OnInit {
     listDoctor.forEach((element) => {
       this.listDoctor.push({ name: element.name, id: element.id });
     });
-    console.log(this.listDoctor);
   }
   async getListAppointment(id) {
     try {

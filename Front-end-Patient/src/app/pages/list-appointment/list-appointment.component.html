@@ -1,8 +1,9 @@
 <!-- <app-list-doctor></app-list-doctor> -->
+<app-main-header></app-main-header>
 <div class="flex">
     <div style="width: 1200px; min-height: 522px;" class="mx-auto my-4 rounded-3xl">
         <p-toast></p-toast>
-        <p-table #dt [value]="listAppointment" [rows]="10" [paginator]="true" [globalFilterFields]="['statusName']"
+        <p-table #dt [value]="listAppointment" [rows]="10" [paginator]="true" [globalFilterFields]="['doctorName']"
             [(selection)]="selectedAppointment" [rowHover]="true" dataKey="id"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [showCurrentPageReport]="true">
@@ -79,7 +80,7 @@
             </div>
             <div class="p-field p-col">
                 <label for="hour">Hour</label>
-                <input type="number" max="24" min="0" id="hour" [(ngModel)]="appointment.hour" pInputText />
+                <input type="number" max="15" min="8" id="hour" [(ngModel)]="appointment.hour" pInputText />
                 <small class="p-error" *ngIf="submitted && !appointment.hour">Hour is required.</small>
             </div>
         </div>
@@ -91,3 +92,4 @@
             (click)="createAppointment()"></button>
     </ng-template>
 </p-dialog>
+<app-main-footer></app-main-footer>

@@ -27,10 +27,8 @@ export class LoginComponent implements OnInit {
       "email": email,
       "password": password,
     };
-    console.log(data);
     const reqApi = await this.authService.login(data).toPromise();
     const decode =  await jwt_decode(reqApi);
-    console.log(decode);
     if (decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Patient") {
      this.appService.changeId(parseInt(decode["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]));     
      this.router.navigateByUrl("/list-appointment");
