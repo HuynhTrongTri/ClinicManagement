@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
     const decode = jwt_decode(reqApi);
     this.appService.changeId(parseInt(decode['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']));
 
-
-    
     if (reqApi != null) {
         this.router.navigateByUrl('/home');
     } else {

@@ -20,4 +20,15 @@ export class AppointmentService {
     });
     return this.httpClient.get(this.ROOT_URL + '/' + data, { headers: header });
   }
+
+  apiUpdateAppointment(id: any, data: any): Observable<any> {
+    this.token = this.authService.getAccessToken();
+    const header = new HttpHeaders({
+      'Authorization': this.token,
+    });
+    console.log(id);
+    console.log(data);
+    
+    return this.httpClient.put(this.ROOT_URL + '/UpdateStatus/' + id, data, { headers: header });
+  }
 }

@@ -1,7 +1,7 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { request } from 'node:http';
+import { MessageService } from 'primeng/api';
 import { AppService } from 'src/app/app.service';
 import { ProfileService } from './profile.service';
 import { User } from './User';
@@ -15,8 +15,9 @@ export class ProfileComponent implements OnInit {
 
   id: number;
   currentUser: User;
+  formUser: User;
 
-  constructor(private appService: AppService, private proService: ProfileService, private router: Router) { }
+  constructor(private appService: AppService, private proService: ProfileService, private router: Router, private messageService: MessageService) { }
 
 
   ngOnInit() {
@@ -29,7 +30,6 @@ export class ProfileComponent implements OnInit {
   async getDoctorInfo(id: any) {
     try {
       const reqApi = await this.proService.apiProfile(id).toPromise();
-      console.log(reqApi);
       this.currentUser = reqApi;
     } catch (error) {
       this.router.navigateByUrl('/');
@@ -38,11 +38,33 @@ export class ProfileComponent implements OnInit {
 
   async updateDoctorInfo(id: any) {
     try {
-      const reqApi = await this.proService.apiUpdateProfile(id, id).toPromise();
-      console.log(reqApi);
-      this.currentUser = reqApi;
+      const data = {
+        "name": this.currentUser.name,
+        "email": this.currentUser.email,
+        "address": this.currentUser.address,
+        "dateOfBirth": this.currentUser.dateOfBirth,
+      };
+      await this.proService.apiUpdateProfile(id, data).toPromise();
+      this.showSuccess();
     } catch (error) {
       this.router.navigateByUrl('/');
     }
+  }
+
+  setFormName(name) {
+    this.currentUser.name = name;
+  }
+  setFormEmail(email) {
+    this.currentUser.email = email;
+  }
+  setFormAddress(address) {
+    this.currentUser.address = address;
+  }
+  setFormDateOfBirth(dob) {
+    this.currentUser.dateOfBirth = dob;
+  }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
   }
 }

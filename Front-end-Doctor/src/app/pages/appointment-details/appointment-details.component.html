@@ -31,15 +31,18 @@
 
     <div class="grid">
       <label for="feedback">Feedback</label>
-      <textarea id="feedback" type="text" rows="4" value="{{currentAppointment?.feedback}}" pInputTextarea></textarea>
+      <textarea #feedback type="text" rows="4" value="{{currentAppointment?.feedback}}"
+        (input)="setFormFeedback(feedback.value)" pInputTextarea></textarea>
     </div>
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 
     <div class="mt-4 float-right">
-      <p-button type="button" label="Save" styleClass="p-button-success"></p-button>
+      <p-button type="button" label="Save" styleClass="p-button-success"
+        (onClick)="updateDoctorInfo(currentAppointment.id)"></p-button>
       <p-button class="ml-4" type="button" label="Cancel" styleClass="p-button-secondary" routerLink="/home">
       </p-button>
     </div>
   </div>
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>
 </div>
 <app-main-footer></app-main-footer>

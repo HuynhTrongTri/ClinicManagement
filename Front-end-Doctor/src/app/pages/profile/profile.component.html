@@ -6,26 +6,30 @@
         <h1>Profile</h1>
       </div>
       <div class="px-4">
-        <table class="w-4/5 mx-auto mt-6">
-          <tr>
-            <td class="title">Name:</td>
-            <td><input value="{{currentUser?.name}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Email:</td>
-            <td><input value="{{currentUser?.email}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Address:</td>
-            <td><input value="{{currentUser?.address}}"></td>
-          </tr>
-          <tr>
-            <td class="title">Date of birth:</td>
-            <td><input value="{{currentUser?.dateOfBirth}}"></td>
-          </tr>
-        </table>
-        <button class="submit-btn">Update</button>
-        <br/>
+        <form #infoForm="ngForm" (ngSubmit)="updateDoctorInfo(currentUser.id)" >
+          <table class="w-4/5 mx-auto mt-6">
+            <tr>
+              <td class="title">Name:</td>
+              <td><input #name type="text" value="{{currentUser?.name}}" (keyup)="setFormName(name.value)"
+                ></td>
+            </tr>
+            <tr>
+              <td class="title">Email:</td>
+              <td><input #email type="text" value="{{currentUser?.email}}" (keyup)="setFormEmail(email.value)"></td>
+            </tr>
+            <tr>
+              <td class="title">Address:</td>
+              <td><input #address type="text" value="{{currentUser?.address}}" (keyup)="setFormAddress(address.value)"></td>
+            </tr>
+            <tr>
+              <td class="title">Date of birth:</td>
+              <td><input #dob type="date" value="{{currentUser?.dateOfBirth | date:'yyyy-MM-dd'}}" (input)="setFormDateOfBirth(dob.value)"></td>
+            </tr>
+          </table>
+          <button class="submit-btn">Update</button>
+        </form>
+        <p-toast [style]="{marginTop: '80px'}"></p-toast>
+        <br />
       </div>
     </div>
   </div>

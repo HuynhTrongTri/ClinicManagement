@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   comingAppointment: Appointment[] = [];
   cancelAppointment: Appointment[] = [];
   sortedAppointment: Appointment[] = [];
-  
+
   constructor(private router: Router, private appService: AppService, private homeService: HomeService) { }
 
   ngOnInit() {
@@ -28,22 +28,19 @@ export class HomeComponent implements OnInit {
 
   async getAllAppointment(id: any) {
     try {
-      console.log('id: ' + id);
       const resApi = await this.homeService.apiAppointmentOfDoctor(id).toPromise();
       this.listAppointment = resApi;
-      console.log(this.listAppointment);
       this.listAppointment.reverse();
 
       for (let index = 0; index < this.listAppointment.length; index++) {
         const element = this.listAppointment[index];
         if (element.statusName == 'Cancel') {
           this.cancelAppointment.push(element);
-
+        } else if (element.statusName == 'Done') {
         } else {
           this.comingAppointment.push(element);
         }
       }
-
     } catch (error) {
       this.router.navigateByUrl('/');
     }
@@ -51,9 +48,7 @@ export class HomeComponent implements OnInit {
 
   openAppointmentDetails(aId: any) {
     aId = parseInt(aId);
-    console.log(aId);
     this.appService.changAppointmentId(aId);
-    console.log(this.appService.currentAppointmentId);
     this.navigateTo('/details');
 
   }
